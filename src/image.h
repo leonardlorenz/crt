@@ -7,6 +7,7 @@ struct Image {
     unsigned width;
     unsigned height;
     double gamma;
+    unsigned char* filename;
     unsigned char* image;
 };
 
@@ -28,6 +29,6 @@ double image_gammaCorrect(double, double);
 /**
  * writes an image in 32bit float PNG format
  */
-void image_write(unsigned, unsigned, const unsigned char*, const char*);
+void image_write(Image png);
 
 #endif
