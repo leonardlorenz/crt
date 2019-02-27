@@ -25,11 +25,16 @@ void image_setPixel(unsigned, unsigned, uint8_t*, Image);
 
 /**
  * takes a colour value and applies gamma correction
+ * parameters:
+ * red / green / blue value (0-255)
+ * gamma correction factor
  */
 double image_gammaCorrect(uint8_t, double);
 
 /**
  * writes an image in 32bit float PNG format
+ * parameters:
+ * image
  */
 void image_write(Image png);
 
