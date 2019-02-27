@@ -1,10 +1,11 @@
 #include <math.h>
 #include <stdlib.h>
 #include <stdio.h>
+#include <stdint.h>
 #include "lib/lodepng.h"
 #include "image.h"
 
-void image_setPixel(unsigned x, unsigned y, unsigned* color, Image img) {
+void image_setPixel(unsigned x, unsigned y, uint8_t* color, Image img) {
     int pixelAddress = 4 * img.width * y + 4 * x;
     /** red */
     img.image[pixelAddress] = image_gammaCorrect(color[0], img.gamma);
@@ -16,7 +17,7 @@ void image_setPixel(unsigned x, unsigned y, unsigned* color, Image img) {
     img.image[pixelAddress + 3] = color[3];
 }
 
-double image_gammaCorrect(double val, double gamma) {
+double image_gammaCorrect(uint8_t val, double gamma) {
     val = powf(val, 1 / gamma);
     return val;
 }
@@ -34,5 +35,5 @@ void image_write(Image png) {
     if (!error) lodepng_save_file(png.image, pngsize, png.filename);
     if (error) printf("error %u: %s\n", error, lodepng_error_text(error));
 
-    free(png.image);
+    free(out);
 }

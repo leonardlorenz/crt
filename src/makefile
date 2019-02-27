@@ -1,11 +1,11 @@
-LIBRARIES=lib/lodepng.h lib/lodepng.c
-CFLAGS=-lm
+LIBRARIES=lib/lodepng.c
+CFLAGS=-Wall -Wextra -fsanitize=address
 
 compile:
-	gcc main.c \
-		image.h image.c \
+	clang -o out \
 		$(LIBRARIES) $(CFLAGS) \
-		-o out
+		main.c \
+		image.c \
 
 run:
 	./out

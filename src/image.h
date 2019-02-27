@@ -1,13 +1,15 @@
+#include <stdint.h>
+
 #ifndef IMAGE
 #define IMAGE
 
 typedef struct Image Image;
 
 struct Image {
-    unsigned width;
-    unsigned height;
+    uint32_t width;
+    uint32_t height;
     double gamma;
-    unsigned char* filename;
+    char* filename;
     unsigned char* image;
 };
 
@@ -19,12 +21,12 @@ struct Image {
  * color
  * image
  */
-void image_setPixel(unsigned, unsigned, unsigned*, Image);
+void image_setPixel(unsigned, unsigned, uint8_t*, Image);
 
 /**
  * takes a colour value and applies gamma correction
  */
-double image_gammaCorrect(double, double);
+double image_gammaCorrect(uint8_t, double);
 
 /**
  * writes an image in 32bit float PNG format
