@@ -1,7 +1,7 @@
 #include <stdint.h>
 
-#ifndef IMAGE
-#define IMAGE
+#ifndef IMAGE_H
+#define IMAGE_H
 
 typedef struct Image Image;
 
@@ -21,7 +21,7 @@ struct Image {
  * color
  * image
  */
-void image_setPixel(uint16_t, uint16_t, uint8_t*, Image);
+void image_set_pixel(uint16_t, uint16_t, uint8_t*, Image);
 
 /**
  * takes a colour value and applies gamma correction
@@ -29,13 +29,6 @@ void image_setPixel(uint16_t, uint16_t, uint8_t*, Image);
  * red / green / blue value (0-255)
  * gamma correction factor
  */
-double image_gammaCorrect(uint8_t, double);
-
-/**
- * writes an image in 32bit float PNG format
- * parameters:
- * image
- */
-void image_write(Image png);
+double image_gamma_correct(uint8_t, double);
 
 #endif
