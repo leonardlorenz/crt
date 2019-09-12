@@ -6,8 +6,8 @@
 typedef struct Image Image;
 
 struct Image {
-    uint32_t width;
-    uint32_t height;
+    uint16_t width;
+    uint16_t height;
     double gamma;
     char* filename;
     unsigned char* image;
@@ -21,7 +21,7 @@ struct Image {
  * color
  * image
  */
-void image_setPixel(unsigned, unsigned, uint8_t*, Image);
+void image_setPixel(uint16_t, uint16_t, uint8_t*, Image);
 
 /**
  * takes a colour value and applies gamma correction
