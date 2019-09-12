@@ -13,7 +13,7 @@ int main(int argc, char** argv) {
     img.width = 16;
     img.height = 16;
     img.gamma = 2.2;
-    img.filename = argc > 1 ? argv[1] : "test.png";
+    img.filename = argc > 1 ? argv[1] : "test.ppm";
     img.image = malloc(img.width * img.height * 4);
 
     /** generate some image **/

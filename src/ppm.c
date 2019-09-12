@@ -26,23 +26,36 @@ void write_ppm(Image img) {
         exit(1);
     }
 
-
     /** write the header **/
     write_line("P3", out_fd);
 
-    char width[12];
-    char height[12];
+    char* width = malloc(32);
+    char* height = malloc(32);
+    if (!width || !height) {
+        fprintf(stderr, "Couldn't allocate memory");
+        exit(1);
+    }
     sprintf(width,"%d", img.width);
     sprintf(height,"%d", img.height);
 
-    char* dimensions = strcat(strcat(width, " "), height);
+    char* dimensions = malloc(128);
+    if (!dimensions) {
+        fprintf(stderr, "Couldn't allocate memory");
+        exit(1);
+    }
+    strcpy(dimensions, strcat(strcat(width, " "), height));
+    free(width);
+    free(height);
 
     write_line(dimensions, out_fd);
 
     write_line("255", out_fd);
 
-    char* line;
-    clear_line(line);
+    char* line = malloc(1024);
+    if (!line) {
+        fprintf(stderr, "Couldn't allocate memory");
+        exit(1);
+    }
 
     for (int y = 0; y < img.height; y++) {
         for (int x = 0; x < img.height; x++) {
@@ -74,4 +87,6 @@ void write_ppm(Image img) {
             write_line(line, out_fd);
         }
     }
+    free(line);
+    fclose(out_fd);
 }

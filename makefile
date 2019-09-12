@@ -13,4 +13,4 @@ run:
 	./out
 
 clean:
-	rm out *.png
+	rm out *.ppm
