@@ -13,6 +13,8 @@ struct Image {
     unsigned char* image;
 };
 
+uint8_t clamp(uint64_t);
+
 /**
  * sets a colour for a pixel at a specified address using an RGB value
  * parameters:
