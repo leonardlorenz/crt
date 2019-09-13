@@ -20,6 +20,6 @@ void image_set_pixel(uint16_t x, uint16_t y, uint8_t* color, Image img) {
 
 double image_gamma_correct(uint8_t val, double gamma) {
     /** value ^ (1/gamma) */
-    val = powf(val, 1 / gamma);
+    //val = powf(val, 1 / gamma);
     return val;
 }

@@ -7,6 +7,6 @@
 void write_ppm(Image img);
 
 /** clears content of current line and fills the array with zeroes **/
-void write_ppm(Image img);
+void write_rgb_ppm(Image img);
 
 #endif

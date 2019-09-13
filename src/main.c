@@ -10,8 +10,8 @@ void clamp(uint16_t integer) {
 
 int main(int argc, char** argv) {
     Image img;
-    img.width = 16;
-    img.height = 16;
+    img.width = 64;
+    img.height = 64;
     img.gamma = 2.2;
     img.filename = argc > 1 ? argv[1] : "test.ppm";
     img.image = malloc(img.width * img.height * 4);
@@ -35,6 +35,6 @@ int main(int argc, char** argv) {
             image_set_pixel(x, y, color, img);
         }
     }
-    write_ppm(img);
+    write_rgb_ppm(img);
     free(img.image);
 }

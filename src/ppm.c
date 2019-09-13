@@ -18,7 +18,7 @@ void write_line(char* line, FILE* out_fd) {
     }
 }
 
-void write_ppm(Image img) {
+void write_rgb_ppm(Image img) {
     FILE* out_fd;
     out_fd = fopen(img.filename, "w");
     if (!out_fd) {
@@ -26,38 +26,41 @@ void write_ppm(Image img) {
         exit(1);
     }
 
-    /** write the header **/
-    write_line("P3", out_fd);
-
-    char* width = malloc(32);
-    char* height = malloc(32);
-    if (!width || !height) {
-        fprintf(stderr, "Couldn't allocate memory");
-        exit(1);
-    }
-    sprintf(width,"%d", img.width);
-    sprintf(height,"%d", img.height);
-
-    char* dimensions = malloc(128);
-    if (!dimensions) {
-        fprintf(stderr, "Couldn't allocate memory");
-        exit(1);
-    }
-    strcpy(dimensions, strcat(strcat(width, " "), height));
-    free(width);
-    free(height);
-
-    write_line(dimensions, out_fd);
-
-    write_line("255", out_fd);
-
+    /** write the image data **/
     char* line = malloc(1024);
     if (!line) {
         fprintf(stderr, "Couldn't allocate memory");
         exit(1);
     }
 
+    /** write the header **/
+    strcpy(line, "P3\n");
+    write_line(line, out_fd);
+    clear_line(line);
+
+    char* width = malloc(12);
+    char* height = malloc(12);
+    if (!width || !height) {
+        fprintf(stderr, "Couldn't allocate memory");
+        exit(1);
+    }
+    sprintf(width, "%d", img.width);
+    sprintf(height, "%d", img.height);
+
+    strcpy(line, strcat(strcat(strcat(width, " "), height), "\n"));
+    write_line(line, out_fd);
+    clear_line(line);
+
+    free(width);
+    free(height);
+
+    strcpy(line, "255\n");
+    write_line(line, out_fd);
+    clear_line(line);
+
     for (int y = 0; y < img.height; y++) {
+        /** reset line before appending new data **/
+        clear_line(line);
         for (int x = 0; x < img.height; x++) {
             int pixelAddress = 4 * img.width * y  + 4 * x;
             /** Output format: **/
@@ -66,7 +69,6 @@ void write_ppm(Image img) {
             /** Rval Gval Bval **/
 
             /** red */
-            sprintf(width,"%d", img.width);
             char red[12];
             sprintf(red, "%d", img.image[pixelAddress]);
 
@@ -83,9 +85,11 @@ void write_ppm(Image img) {
             strcat(line, green);
             strcat(line, " ");
             strcat(line, blue);
+            strcat(line, " ");
 
-            write_line(line, out_fd);
         }
+        strcat(line, "\n");
+        write_line(line, out_fd);
     }
     free(line);
     fclose(out_fd);

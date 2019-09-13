@@ -1,4 +1,5 @@
 out
 *.png
+*.ppm
 *.o
 *.gch
