@@ -6,16 +6,22 @@
 
 int main(int argc, char** argv) {
 
-    if (argc < 1) {
-        fprintf(stderr, "crt <output_path>");
+    if (argc < 2) {
+        fprintf(stderr, "crt <output_path> <img_size");
         exit(1);
     }
 
+    /** convert input parameter string to integer **/
+    char* ptr;
+    long width;
+    width = strtol(argv[2], &ptr, 10);
+
+    /** define image **/
     Image img;
-    img.width = 64;
-    img.height = 64;
-    img.gamma = 2.2;
     img.filename = argv[1];
+    img.width = width;
+    img.height = width;
+    img.gamma = 2.2;
     img.image = malloc(img.width * img.height * 4);
 
     /** generate some image **/

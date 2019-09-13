@@ -16,7 +16,7 @@ debug: create_dirs
 		$(SRC)
 
 run:
-	./bin/crt.bin ./out/image.ppm
+	./bin/crt.bin ./out/image.ppm 256
 
 build: compile
 
