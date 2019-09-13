@@ -1,4 +1,4 @@
-out
+*.bin
 *.png
 *.ppm
 *.o

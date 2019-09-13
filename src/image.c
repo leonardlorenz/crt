@@ -5,21 +5,20 @@
 #include "image.h"
 
 /** uint8_t* color: array with 4 elements, r/g/b/a */
-void image_set_pixel(uint16_t x, uint16_t y, uint8_t* color, Image img) {
-    int pixelAddress = 4 * img.width * y  + 4 * x;
-    /** red */
-    img.image[pixelAddress] = image_gamma_correct(color[0], img.gamma);
-    /** green */
-    img.image[pixelAddress + 1] = image_gamma_correct(color[1], img.gamma);
-    /** blue */
-    img.image[pixelAddress + 2] = image_gamma_correct(color[2], img.gamma);
-    /** alpha */
-    img.image[pixelAddress + 3] = color[3];
-    //printf("%u, %u, %u\n", color[0], color[1], color[2]);
+void image_set_pixel(uint64_t pixel_address, uint8_t* color, Image img) {
+
+    /** red **/
+    img.image[pixel_address] = image_gamma_correct(color[0], img.gamma);
+    /** green **/
+    img.image[pixel_address + 1] = image_gamma_correct(color[1], img.gamma);
+    /** blue **/
+    img.image[pixel_address + 2] = image_gamma_correct(color[2], img.gamma);
+    /** alpha **/
+    img.image[pixel_address + 3] = color[3];
 }
 
 double image_gamma_correct(uint8_t val, double gamma) {
-    /** value ^ (1/gamma) */
-    //val = powf(val, 1 / gamma);
+    /** value ^ (1/gamma) **/
+    //val = (int) powf((double) val, 2.2);
     return val;
 }

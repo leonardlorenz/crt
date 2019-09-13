@@ -21,7 +21,7 @@ struct Image {
  * color
  * image
  */
-void image_set_pixel(uint16_t, uint16_t, uint8_t*, Image);
+void image_set_pixel(uint64_t pixelAddress, uint8_t* color, Image image);
 
 /**
  * takes a colour value and applies gamma correction

@@ -1,16 +1,22 @@
 CFLAGS=-Wall -Wextra -fsanitize=address
+SRC=./src/*.c
 
 compile:
-	clang -o out \
+	clang -o ./bin/crt.bin \
 		$(CFLAGS) \
-		src/main.c \
-		src/image.c \
-		src/ppm.c \
+		$(SRC)
+
+debug:
+	clang -g -v -o ./bin/debug.bin \
+		$(CFLAGS) \
+		$(SRC)
+
+run:
+	./bin/crt.bin
 
 build: compile
 
-run:
-	./out
+rebuild: compile run
 
 clean:
-	rm out *.ppm
+	rm ./bin/*
