@@ -1,18 +1,22 @@
 CFLAGS=-Wall -Wextra -fsanitize=address
 SRC=./src/*.c
 
-compile:
+create_dirs:
+	test -d ./bin || mkdir ./bin
+	test -d ./out || mkdir ./out
+
+compile: create_dirs
 	clang -o ./bin/crt.bin \
 		$(CFLAGS) \
 		$(SRC)
 
-debug:
+debug: create_dirs
 	clang -g -v -o ./bin/debug.bin \
 		$(CFLAGS) \
 		$(SRC)
 
 run:
-	./bin/crt.bin
+	./bin/crt.bin ./out/image.ppm
 
 build: compile
 
